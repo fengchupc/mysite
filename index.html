@@ -1,79 +1,206 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Welcome</title>
+        <style>
+  		body{
+				background:#CCC;
+			}
+            .loading {
+                width: 100%; /*css get page width*/
+                height: 160px;
+                float: left;
+                margin: auto;
+                left: 50%;
+                top: 50%;
+                margin-left: -50%;
+                margin-top: -80px;
+                color: #fff;
+                background: #333333;
+                position: absolute;
+            }
+			#contant{
+				width: 700px;
+				height:700px;		
+				top:50%;
+				left:50%;
+				margin-left:-350px;
+				margin-top:-350px;
+				position:absolute;
+			}
+            /*
+             #mylist {
+             height: 132px;
+             width: 624px;
+             margin: 48px 0;
+             }*/
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Mysite : My web site" />
+            #mylist li {
+                width: 250px;
+                height: 250px;
+                float: left;
+                margin-right: 24px;
+				margin-top:15px;
+                position: relative;
+				list-style-type:none;
+				text-align:center
+            }
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+            #mylist li div.back {
+                width: 250px;
+                height: 250px;
+                overflow: hidden;
+                background:#999;
+                position: absolute;
+                top: 10px;
+                left: 0;
+            }
+			#mylist li div.front{
+				background: #CDC;
+				width:250px;
+				height:250px;
+				border-radius: 15px 15px 15px 15px;
+			}
+            .back {
+				background: #303030;
+				height: 100%;
+				margin: 0px;
+				text-align: center;
+				width:100%;
+				margin: 0px;
+				position:absolute;
+				border-radius: 15px 15px 15px 15px;
+				cursor: pointer;
+            }
+            .back:hover {
+                border: 0px solid #505050;
+                -moz-box-shadow: 0 0 20px #9CF inset;
+                -webkit-box-shadow: 0 0 20px #9CF inset;
+                box-shadow: 0 0 20px #9CF inset;
+				cursor: pointer;
+            }
+			#footer{
+				position:absolute;
+				bottom:20px;
+				width:100%;
+				margin-left:50%;
+				text-align:center;
+				padding-right:0px;
+				margin-right:0px;
+				z-index:1;
+				overflow:hidden;
+			}
+			#footer li{
 
-    <title>Mysite</title>
-  </head>
+				list-style-type:none;
+			}
 
-  <body>
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src="loading.js"></script>
+        <!--<script src="blur.js"></script>-->
+        <script src="rotate3Di.js"></script>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/fengchupc/mysite">View on GitHub</a>
+        <script>
+            $(function() {
+                $('#loading').activity();
+                setTimeout("removeit()", 800);
+				$('#contant').hide();
 
-          <h1 id="project_title">Mysite</h1>
-          <h2 id="project_tagline">My web site</h2>
+                /*
+                 $('#loading').blurjs({
+                 source: 'body',
+                 overlay: 'rgba(0,0,255,0.4)'
+                 });*/
+                $('#mylist li div.back').hide().css('left', 0);
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/fengchupc/mysite/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/fengchupc/mysite/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+                $('#mylist li').hover(function() {
+                    $(this).find('div').stop().rotate3Di('flip', 250, {
+                        direction : 'unclockwise',
+                        sideChange : mySideChange
+                    });
+                }, function() {
+                    $(this).find('div').stop().rotate3Di('unflip', 500, {
+                        sideChange : mySideChange
+                    });
+                });
+            })
+            function removeit() {
+                $('#loading').activity(false);
+                $('#loading').hide();
+				$('#contant').show();
+            }
+			function mySideChange(front) {
+                    if (front) {
+                        $(this).parent().find('div.front').show();
+                        $(this).parent().find('div.back').hide();
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Mysite maintained by <a href="https://github.com/fengchupc">fengchupc</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+                    } else {
+                        $(this).parent().find('div.front').hide();
+                        $(this).parent().find('div.back').show();
+                    }
+                }
+        </script>
+    </head>
+<body>
+        <div>
+            <div id="loading" class="loading"></div>
+            <div id="contant" class="contant">
+                <ul id="mylist">
+                    <li>
+                        <div class="front">
+                            <h2><a href="#">Apple</a></h2>
+                        </div>
+                        <div class="back">
+                            <p>
+                                <a href="#">Apples are a round fruit.</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="front">
+                            <h2><a href="#">Banana</a></h2>
+                        </div>
+                        <div class="back">
+                            <p>
+                                <a href="#">Bananas are a yellow fruit.</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="front">
+                            <h2><a href="#">Cherry</a></h2>
+                        </div>
+                        <div class="back">
+                            <p>
+                                <a href="#">Cherries are a delicious fruit.</a>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="front">
+                            <h2><a href="#">Durian</a></h2>
+                        </div>
+                        <div class="back">
+                            <p>
+                                <a href="#">Durians are a stinky fruit.</a>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="footer">
+            	<ul>
+                	<li>
+                    	&copy;ALL Rights Reserved
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
 </html>
+
